@@ -136,6 +136,8 @@ live_feed_schema = pa.schema(
         pa.field("eta", pa.uint32()),
         pa.field("vertical_speed", pa.int16()),  # 64 * 9-bit + 1-bit sign
         pa.field("squawk", pa.uint16()),
+        pa.field("hex", pa.uint16()),
+        pa.field("flight", pa.string()),
     ]
 )
 

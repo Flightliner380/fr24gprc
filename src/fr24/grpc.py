@@ -211,6 +211,9 @@ def live_feed_flightdata_dict(
         "typecode": lfr.extra_info.type,
         "eta": lfr.extra_info.schedule.eta,
         "squawk": lfr.extra_info.squawk,
+        "icao_address": lfr.extra_info.icao_address,
+        "flight": lfr.extra_info.flight,
+
     }
 
 
