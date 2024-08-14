@@ -120,24 +120,29 @@ class PlaybackTrackEMSRecord(TypedDict):
 live_feed_schema = pa.schema(
     [
         pa.field("timestamp", pa.uint32()),
-        pa.field("flightid", pa.uint32()),
-        pa.field("lat", pa.float32()),
-        pa.field("lon", pa.float32()),
-        pa.field("track", pa.uint16()),
-        pa.field("alt", pa.int32()),
-        pa.field("ground_speed", pa.int16()),
-        pa.field("on_ground", pa.bool_()),
-        pa.field("callsign", pa.string()),
-        pa.field("source", pa.uint8()),
+        pa.field("ymd", pa.string()),
+        pa.field("frid", pa.string()),
+        pa.field("hex", pa.string()),
         pa.field("reg", pa.string()),
-        pa.field("origin", pa.string()),
-        pa.field("destination", pa.string()),
-        pa.field("typecode", pa.string()),
+        pa.field("ac", pa.string()),
+        pa.field("cs", pa.string()),
+        pa.field("lon", pa.float32()),
+        pa.field("lat", pa.float32()),
+        pa.field("alt", pa.int32()),
+        pa.field("speed", pa.int16()),
+        pa.field("hdg", pa.uint16()),
+        pa.field("gnd", pa.bool_()),
+        pa.field("flight", pa.string()),
+        pa.field("dep", pa.string()),
+        pa.field("arr", pa.string()),
+        pa.field("source", pa.uint8()),
+        pa.field("fnear", pa.string()),
+        pa.field("lnear", pa.string()),
         # pa.field("eta", pa.uint32()),
-        pa.field("vertical_speed", pa.int16()),  # 64 * 9-bit + 1-bit sign
+        # pa.field("vertical_speed", pa.int16()),  # 64 * 9-bit + 1-bit sign
         # pa.field("squawk", pa.uint16()),
         pa.field("icao_address", pa.uint32()),
-        pa.field("flight", pa.string()),
+        pa.field("flightid", pa.uint32()),
     ]
 )
 
