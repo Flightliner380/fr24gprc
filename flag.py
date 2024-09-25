@@ -251,7 +251,7 @@ def find_icao_range(icao):
     for icao_range in ICAO_Ranges:
         if hexa >= icao_range['start'] and hexa <= icao_range['end']:
             iso = icao_range['iso']
-            print(icao,hexa,iso)
+            # print(icao,hexa,iso)
             return iso
 
     return ''

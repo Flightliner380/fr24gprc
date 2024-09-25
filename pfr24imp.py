@@ -38,12 +38,15 @@ async def my_feed() -> None:
     conf = 'http::addr=host3.nzaa.de:49000;username=flt;password=qFlightRadar_16_;'
 
     async with FR24() as fr24:
-        await fr24.login()
+     #    await fr24.login()
+        # response = await fr24.live_feed.fetch(fields=["vspeed"])
         response = await fr24.live_feed.fetch(fields=["flight","reg","type","icao_address","route"])
         # print(response.data)
         datac = response.to_arrow()
         df=datac.df
-        print(type(df));
+        print(type(df))
+        print(datac.df.columns)
+       # print(type(datac.df));
         df['hex']=df['icao_address'].apply(int2hexcode)
         df['frid']=df['flightid'].apply(int2frid)
         df['ymd']=df['timestamp'].apply(ymd)
@@ -55,12 +58,32 @@ async def my_feed() -> None:
         cols = list(df.columns.values) #Make a list of all of the columns in the df
         df.drop('icao_address',axis=1, inplace=True)
         df.drop('flightid',axis=1, inplace=True)
-        print(df)
-        #datac.save()
-#        print(datac.df.to_parquet())
-        with Sender.from_conf(conf) as sender:
-            sender.dataframe(df, table_name="fr24t", at="timestamp")
-            sender.flush()
+        
+        
+        #datac=df
+        fmt = "parquet"
+        fp="/home/ubuntu/fr24_" + dt.datetime.now().strftime("%Y%m%d-%H%M%S") +".parq"
+        json="/home/ubuntu/fr24_" + dt.datetime.now().strftime("%Y%m%d-%H%M%S") +".json"
+     #    fp="/home/ubuntu/none.parq"
+        print(datac.df)
+     #    df.attr()
+        print(df.attrs)#.get('PosixPath'))
+        print(df)#.get('PosixPath'))
+        df.attrs['base_dir']=''
+     #    df.to_json(json)
+        df.to_parquet(fp,compression='gzip')
+     #    df.save(fp, fmt)
+        
+     #    console.print(get_success_message(datac, fp))
+
+        # print(datac.df.to_parquet())
+        # print(df.to_parquet())
+     #    print("Write")
+        #df.to_parquet("/home/ubuntu/my.parquet")
+     #    print("End")
+     #    with Sender.from_conf(conf) as sender:
+     #        sender.dataframe(df, table_name="fr24t", at="timestamp")
+     #        sender.flush()
             
 # await my_feed()
 
