@@ -201,7 +201,7 @@ def live_feed_flightdata_dict(
         "hdg": lfr.track,
         "alt": lfr.alt,
         "speed": lfr.speed,
-        "vertical_speed": lfr.extra_info.vspeed,
+        "vspeed": lfr.extra_info.vspeed,
         "gnd": lfr.on_ground,
         "cs": lfr.callsign,
         "source": lfr.source,
@@ -210,7 +210,7 @@ def live_feed_flightdata_dict(
         "arr": lfr.extra_info.route.to,
         "ac": lfr.extra_info.type,
         # "eta": lfr.extra_info.schedule.eta,
-        # "squawk": lfr.extra_info.squawk,
+        "squawk": lfr.extra_info.squawk,
         "icao_address": lfr.extra_info.icao_address,
         "flight": lfr.extra_info.flight,
 
